@@ -46,4 +46,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.github.travijuu:numberpicker:1.0.7")
+    implementation("com.shawnlin:number-picker:2.4.2'")
 }

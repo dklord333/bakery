@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView   xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="20dp"
+    app:cardCornerRadius="12dp"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/itemviewMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintHeight_percent="0.25"
+    tools:ignore="MissingConstraints"
+
+    >
+    <FrameLayout
+        android:layout_width="0dp"
+        android:id="@+id/itemviewPic"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintWidth_percent="0.3"
+        >
+        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Itemimage"
+        />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/itemtitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Chease Cake"
+        android:textSize="22sp"
+        android:gravity="center"
+
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toEndOf="@id/itemviewPic"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/Quantity"
+        android:text="Qt:2"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toEndOf="@id/itemtitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.18" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="20sp"
+        app:layout_constraintWidth_percent="0.67"
+        app:layout_constraintHeight_percent="0.43"
+        app:layout_constraintStart_toEndOf="@id/itemviewPic"
+        android:id="@+id/OrderAdress"
+        app:layout_constraintTop_toBottomOf="@+id/itemtitle"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Message"
+        android:id="@+id/Messagebtn"
+        app:layout_constraintStart_toEndOf="@id/AcceptBtn"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/OrderAdress"
+        app:layout_constraintHeight_percent="0.28"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/AcceptBtn"
+        android:text="Accept"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderAdress"
+        app:layout_constraintHeight_percent="0.28"
+        app:layout_constraintWidth_percent="0.26"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/OrderAdress"
+        app:layout_constraintHeight_percent="0.28"
+        app:layout_constraintStart_toEndOf="@+id/Messagebtn"
+        android:text="Reject"
+        android:id="@+id/RejectBtn"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/RejectBtn"
+        app:layout_constraintTop_toBottomOf="@+id/OrderAdress"
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:id="@+id/t"
+        android:text="1995 Rs"
+        android:paddingTop="5dp"
+        android:textSize="20sp"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
