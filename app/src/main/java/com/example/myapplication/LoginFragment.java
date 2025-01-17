@@ -16,11 +16,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.databinding.FragmentLoginBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class LoginFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
