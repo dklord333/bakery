@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,37 +25,46 @@ public class customer_dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        ActivityCustomerDashboardBinding binding=ActivityCustomerDashboardBinding.inflate(getLayoutInflater());
+        ActivityCustomerDashboardBinding binding = ActivityCustomerDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Spinner spinner=binding.dropdown;
-        String[]  spinnerItems={"Select Category","Cakes","Biscuits","Brownies","Baked Items","Dougnuts, Sundas"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItems) {
-            @Override
-            public boolean isEnabled(int position) {
-                // Disable the hint option
-                if (position == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
+        Spinner spinner = binding.dropdown;
+        String[] spinnerItems = {"Select Category", "Cakes", "Biscuits", "Brownies", "Baked Items", "Dougnuts, Sundas"};
+   ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,spinnerItems){
+     @Override
+     public boolean isEnabled(int position) {
+         if(position==0){
+             return false;
+         }
+         else{
+             return true;
+         }
+     }
 
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                // Change color of hint item (optional)
-                View view = super.getDropDownView(position, convertView, parent);
-                if (position == 0) {
-                    TextView tv = (TextView) view;
 
-                }
-                return view;
-            }
-        };
+     public View getDropDownView(int position,View convertView,ViewGroup parent) {
+         View view=super.getDropDownView(position,convertView,parent);
 
-// Set the layout resource for spinner dropdown items
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+          view.setOnHoverListener(new View.OnHoverListener() {
+              @Override
+              public boolean onHover(View v, MotionEvent event) {
+                  if(event.getAction()==MotionEvent.ACTION_HOVER_ENTER){
+                      TooltipCompat.setTooltipText(v, "Tooltip for position " + position);
+                  }
+                  return false;
+              }
+          });
+             if(position==0){
+                 TextView tv=(TextView) view;
+                 tv.setTextColor(Color.GRAY);
+             }
 
-// Set the adapter on the spinner
-        spinner.setAdapter(adapter);
+return view;
+
+     }
+
+   };
+   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+   spinner.setAdapter(adapter);
     }
+
 }

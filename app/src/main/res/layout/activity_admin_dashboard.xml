@@ -87,4 +87,14 @@
 
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:id="@+id/adminItem"
+
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/list_item"
+
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
