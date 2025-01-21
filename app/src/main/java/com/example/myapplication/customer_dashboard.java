@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.databinding.ActivityCustomerDashboardBinding;
 
@@ -65,6 +67,14 @@ return view;
    };
    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
    spinner.setAdapter(adapter);
+
+       RecyclerView recyclerView=findViewById(R.id.Cus_recyclerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        cus_item_adapter cusItemAdapter=new cus_item_adapter();
+        recyclerView.setAdapter(cusItemAdapter);
     }
+
+
+
 
 }
