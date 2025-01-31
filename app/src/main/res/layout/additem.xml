@@ -128,7 +128,17 @@
 
 
                 app:layout_constraintTop_toBottomOf="@id/Description"
-                app:layout_constraintWidth_percent="0.60" />
+                app:layout_constraintWidth_percent="0.60"
+
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:id="@+id/imageview"
+                    />
+
+            </FrameLayout>
 
             <Button
                 android:id="@+id/picbtn"

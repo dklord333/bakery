@@ -11,4 +11,9 @@ public class Validations {
           && password.matches(".*[A-Z].*")
                 && password.matches(".*\\W.*");
     }
+    public  static  boolean isempty(String password,String email, String username, String phoneNo){
+
+        return  password==null || password.isEmpty() || email==null || email.isEmpty()|| username==null || username.isEmpty()|| phoneNo==null ||phoneNo.isEmpty();
+    }
+
 }

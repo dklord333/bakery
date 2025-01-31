@@ -37,7 +37,9 @@ android {
 
 
 dependencies {
-
+    implementation(platform("com.google.firebase:firebase-bom:32.1.0")) // Firebase BOM for consistent versions
+    implementation("com.google.firebase:firebase-firestore:25.0.0")
+    implementation("com.google.firebase:firebase-auth")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -45,11 +47,10 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.google.firebase:firebase-auth:23.1.0")
     implementation("com.github.travijuu:numberpicker:1.0.7")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
