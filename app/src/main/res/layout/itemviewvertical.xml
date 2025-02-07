@@ -10,10 +10,13 @@
     app:cardCornerRadius="18dp"
     app:cardElevation="7dp">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         app:layout_constraintHeight_percent="0.9"
         android:layout_height="match_parent">
+
+
 
         <FrameLayout
             android:id="@+id/itemviewPic"
@@ -22,6 +25,7 @@
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <ProgressBar
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -32,9 +36,29 @@
             <ImageView
                 android:id="@+id/Itemimage"
                 android:layout_width="wrap_content"
-
+                android:scaleType="centerCrop"
                 android:layout_height="wrap_content" />
         </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/itemviewPic"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/edit_icon"
+                app:tint="@color/white"
+                android:backgroundTint="@android:color/transparent"
+                android:visibility="gone"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/itemtitle"
@@ -42,7 +66,7 @@
             android:layout_height="0dp"
             android:text="Chese Lotus cake"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="28sp"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintTop_toBottomOf="@+id/itemviewPic" />
 
@@ -54,12 +78,12 @@
 
             app:layout_constraintTop_toBottomOf="@+id/itemtitle" >
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:id="@+id/itemprice"
                 android:text="1995 Rs"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 app:layout_constraintTop_toBottomOf="@+id/itemtitle"
                 app:layout_constraintBottom_toBottomOf="parent" />
             

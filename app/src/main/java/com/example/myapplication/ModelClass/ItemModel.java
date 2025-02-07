@@ -11,6 +11,9 @@ public class ItemModel implements Serializable {
     public String description;
     public String image;
 
+    public ItemModel() {
+    }
+
     public ItemModel(String itemName, String price, String stock, String category, String description, String image) {
         this.itemName = itemName;
         this.price = price;
@@ -20,13 +23,7 @@ public class ItemModel implements Serializable {
         this.image = image;
     }
 
-    public String getImage() {
-        return image;
-    }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getDescription() {
         return description;
@@ -66,5 +63,12 @@ public class ItemModel implements Serializable {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

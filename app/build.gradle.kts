@@ -40,6 +40,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.1.0")) // Firebase BOM for consistent versions
     implementation("com.google.firebase:firebase-firestore:25.0.0")
     implementation("com.google.firebase:firebase-auth")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("com.google.firebase:firebase-storage")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

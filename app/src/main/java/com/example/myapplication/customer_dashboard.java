@@ -2,9 +2,11 @@ package com.example.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -12,16 +14,24 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.TooltipCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.AdapterClases.cus_item_adapter;
+import com.example.myapplication.ModelClass.ItemModel;
 import com.example.myapplication.databinding.ActivityCustomerDashboardBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class customer_dashboard extends AppCompatActivity {
+ private List<ItemModel> itemlist;
+ private cus_item_adapter cusItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +77,35 @@ return view;
    };
    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
    spinner.setAdapter(adapter);
+        itemlist=new ArrayList<>();
 
        RecyclerView recyclerView=findViewById(R.id.Cus_recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        cus_item_adapter cusItemAdapter=new cus_item_adapter();
+        cusItemAdapter=new cus_item_adapter(this,itemlist);
         recyclerView.setAdapter(cusItemAdapter);
-    }
+        FetchfromFirebase();
 
+    }
+    public void FetchfromFirebase(){
+        FirebaseFirestore.getInstance().collection("ItemList").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (itemlist == null) { // ✅ Prevent NullPointerException
+                    itemlist = new ArrayList<>();
+                }
+                itemlist.clear();
+               for(DocumentSnapshot document:queryDocumentSnapshots){
+                   ItemModel itemModel=document.toObject(ItemModel.class);
+                   itemlist.add(itemModel);
+               }
+                Log.d("ItemListFROMCUS", "Fetched data CUS: " + itemlist.size());  // Log the size of the list
+
+                cusItemAdapter.notifyDataSetChanged();
+
+            }
+        }) .addOnFailureListener(e -> Log.e("Firestore", "Error fetching data", e));
+
+    }
 
 
 
