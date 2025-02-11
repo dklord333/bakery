@@ -73,4 +73,13 @@ public class Customs {
 
 
     }
+    public  void showorderpage(){
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.additem, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(dialogView);
+
+
+
+    }
 }

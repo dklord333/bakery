@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -34,16 +35,19 @@ public class admin_item_adapter extends RecyclerView.Adapter<admin_item_adapter.
     @NonNull
     @Override
     public itemviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         ItemviewverticalBinding binding= ItemviewverticalBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
     return new itemviewholder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull itemviewholder holder, int position) {
+holder.binding.editimage.setVisibility(View.VISIBLE);
         ItemModel itemModel=itemModelList.get(position);
         holder.binding.itemtitle.setText(itemModel.getItemName());
         holder.binding.itemprice.setText(itemModel.getPrice());
-        Bitmap decode= ImageUtils.decodeBase64(itemModel.getImage());
+        String base64Image = itemModel.getImage();
+        Bitmap decode= ImageUtils.decodeBase64(base64Image);
         Glide.with(context).load(decode).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
@@ -54,12 +58,13 @@ public class admin_item_adapter extends RecyclerView.Adapter<admin_item_adapter.
             @Override
             public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
 
-
+                Log.e("Image", "Image Load worked"+base64Image);
                 return false;
 
             }
-        });
+        }).into(holder.binding.Itemimage);
     return ;
+
     }
 
     @Override

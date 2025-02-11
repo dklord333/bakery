@@ -1,10 +1,12 @@
 package com.example.myapplication.AdapterClases;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -64,8 +66,10 @@ public class cus_item_adapter extends RecyclerView.Adapter<cus_item_adapter.item
                return false;
            }
        }).into(holder.binding.Itemimage);
-
+//holder.binding.itemview.setOnClickListener(new View.OnClickListener(V -> showorderpage()));
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -85,4 +89,5 @@ public class cus_item_adapter extends RecyclerView.Adapter<cus_item_adapter.item
 
         }
     }
+
 }

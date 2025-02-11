@@ -58,8 +58,8 @@ public class Admin_Dashboard extends AppCompatActivity {
         itemModelList=new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.adminItem);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 items per row
-        admin_item_adapter adapter = new admin_item_adapter();
-        recyclerView.setAdapter(adapter);
+        adminItemAdapter = new admin_item_adapter(this,itemModelList);
+        recyclerView.setAdapter(adminItemAdapter);
         FetctfromFirebase();
 
         findViewById(R.id.item).setOnClickListener(view  -> showAddItemDialog());

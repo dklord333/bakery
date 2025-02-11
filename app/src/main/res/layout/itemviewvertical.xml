@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="180dp"
     android:layout_height="220dp"
+    android:id="@+id/itemview"
 
     android:layout_margin="8dp"
     app:cardCornerRadius="18dp"
@@ -52,6 +53,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/edit_icon"
+                android:id="@+id/editimage"
                 app:tint="@color/white"
                 android:backgroundTint="@android:color/transparent"
                 android:visibility="gone"
