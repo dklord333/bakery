@@ -1,99 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<androidx.cardview.widget.CardView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="180dp"
-    android:layout_height="220dp"
-    android:id="@+id/itemview"
+    android:layout_width="match_parent"
+    app:layout_constraintWidth_percent="0.4"
+    android:layout_height="wrap_content">
 
-    android:layout_margin="8dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="7dp">
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        app:layout_constraintHeight_percent="0.9"
-        android:layout_height="match_parent">
-
-
-
-        <FrameLayout
-            android:id="@+id/itemviewPic"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ProgressBar
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:outlineAmbientShadowColor="@color/design_default_color_primary"
-                android:layout_gravity="center"
-                />
-
-            <ImageView
-                android:id="@+id/Itemimage"
-                android:layout_width="wrap_content"
-                android:scaleType="centerCrop"
-                android:layout_height="wrap_content" />
-        </FrameLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/itemview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="7dp"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/itemviewPic"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
+            <!-- Image Container -->
+            <FrameLayout
+                android:id="@+id/itemviewPic"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:id="@+id/Itemimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dp" /> <!-- Replace with your drawable -->
+            </FrameLayout>
+
+            <!-- Edit Button -->
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/edit_icon"
                 android:id="@+id/editimage"
-                app:tint="@color/white"
-                android:backgroundTint="@android:color/transparent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/edit_icon"
                 android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/itemviewPic"
+                app:layout_constraintTop_toTopOf="@id/itemviewPic"
+                app:tint="@color/white" />
 
-                />
+            <!-- Title -->
+            <TextView
+                android:id="@+id/itemtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Chese Lotus Cake"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemviewPic" />
 
+            <!-- Price -->
+            <TextView
+                android:id="@+id/itemprice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1995 Rs"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemtitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/itemtitle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Chese Lotus cake"
-            android:gravity="center"
-            android:textSize="28sp"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintTop_toBottomOf="@+id/itemviewPic" />
+    </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.14"
-            android:orientation="horizontal"
-
-            app:layout_constraintTop_toBottomOf="@+id/itemtitle" >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:id="@+id/itemprice"
-                android:text="1995 Rs"
-                android:textSize="22sp"
-                app:layout_constraintTop_toBottomOf="@+id/itemtitle"
-                app:layout_constraintBottom_toBottomOf="parent" />
-            
-
-        </LinearLayout>
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

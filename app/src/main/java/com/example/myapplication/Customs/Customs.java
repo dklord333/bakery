@@ -2,29 +2,34 @@ package com.example.myapplication.Customs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.myapplication.ModelClass.ItemModel;
 import com.example.myapplication.R;
-import com.example.myapplication.Support_clases.Authentication;
+import com.example.myapplication.databinding.OrderpageBinding;
+
+import java.util.List;
 
 public class Customs {
     private  Context context;
     private static AlertDialog alertDialog;
 
-    public Customs(Context context) {
+
+    public Customs(Context context ) {
         this.context = context;
+
     }
 
     public  void showAlert( String title, String message){
@@ -73,13 +78,12 @@ public class Customs {
 
 
     }
-    public  void showorderpage(){
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.additem, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setView(dialogView);
 
+    public static long DateTime() {
 
+            // Get current date and time
+        return System.currentTimeMillis();
 
+        }
     }
-}
+

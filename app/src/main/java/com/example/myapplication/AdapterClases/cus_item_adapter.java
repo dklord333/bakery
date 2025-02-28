@@ -19,7 +19,9 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.myapplication.Customs.Customs;
 import com.example.myapplication.ModelClass.ItemModel;
+import com.example.myapplication.Support_clases.DialogC;
 import com.example.myapplication.Support_clases.ImageUtils;
 import com.example.myapplication.databinding.ItemviewverticalBinding;
 
@@ -66,7 +68,13 @@ public class cus_item_adapter extends RecyclerView.Adapter<cus_item_adapter.item
                return false;
            }
        }).into(holder.binding.Itemimage);
-//holder.binding.itemview.setOnClickListener(new View.OnClickListener(V -> showorderpage()));
+holder.binding.itemview.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        DialogC dialogC=new DialogC(itemList);
+        dialogC.showorderpage(context,position);
+    }
+});
     }
 
 

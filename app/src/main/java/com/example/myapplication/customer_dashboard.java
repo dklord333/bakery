@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.AdapterClases.cus_item_adapter;
+import com.example.myapplication.Customs.Customs;
 import com.example.myapplication.ModelClass.ItemModel;
 import com.example.myapplication.databinding.ActivityCustomerDashboardBinding;
 import com.google.android.gms.tasks.OnSuccessListener;

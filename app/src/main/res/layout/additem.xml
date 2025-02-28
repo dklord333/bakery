@@ -20,15 +20,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:gravity="center"
                 android:text="ADD ITEM"
+
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/cancelDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/olive"
+                android:clickable="true"
+                android:src="@drawable/cross"
+
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <EditText
                 android:id="@+id/itemname"
@@ -134,6 +150,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="fitXY"
 
                     android:id="@+id/imageview"
                     />

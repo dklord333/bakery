@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,9 +27,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.AdapterClases.Orderlist_adapter;
 import com.example.myapplication.AdapterClases.admin_item_adapter;
 import com.example.myapplication.Customs.Customs;
 import com.example.myapplication.ModelClass.ItemModel;
+import com.example.myapplication.ModelClass.Order;
+import com.example.myapplication.Support_clases.DialogC;
+import com.example.myapplication.Support_clases.Orderlist;
 import com.example.myapplication.Support_clases.Validations;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +52,9 @@ public class Admin_Dashboard extends AppCompatActivity {
     ImageView imageV;
     String base64image;
     List<ItemModel> itemModelList;
+    List<Order>ordermodellist;
     admin_item_adapter adminItemAdapter;
+    Orderlist_adapter orderlist_adapter;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         adminItemAdapter = new admin_item_adapter(this,itemModelList);
         recyclerView.setAdapter(adminItemAdapter);
         FetctfromFirebase();
+
 
         findViewById(R.id.item).setOnClickListener(view  -> showAddItemDialog());
     }
@@ -102,6 +110,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         Spinner category = dialogView.findViewById(R.id.Category);
         TextView stock = dialogView.findViewById(R.id.Stock);
         Button upload = dialogView.findViewById(R.id.picbtn);
+        ImageButton cancelbtn= dialogView.findViewById(R.id.cancelDialog);
         imageV = dialogView.findViewById(R.id.imageview);
         upload.setOnClickListener(v->opengallery());
         Button additem=dialogView.findViewById(R.id.Submit);
@@ -129,15 +138,17 @@ public class Admin_Dashboard extends AppCompatActivity {
 
                 Addtofirestore(Admin_Dashboard.this,itemModel);
 
-
             }
         });
 
-
-
-
         AlertDialog dialog = builder.create();
         dialog.show();
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
         // Adjust dialog size based on screen metrics
         if (dialog.getWindow() != null) {
@@ -179,9 +190,10 @@ public class Admin_Dashboard extends AppCompatActivity {
 
     private  static void Addtofirestore(Context context,ItemModel itemModel) {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        String userid=user.getUid();
+        //String userid=user.getUid();
+long date=Customs.DateTime();
         Customs customs=new Customs(context);
-        FirebaseFirestore.getInstance().collection("ItemList").document(userid).set(itemModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseFirestore.getInstance().collection("ItemList").document(String.valueOf(date)).set(itemModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
 
@@ -207,15 +219,41 @@ public class Admin_Dashboard extends AppCompatActivity {
                     ItemModel itemModel=documentSnapshot.toObject(ItemModel.class);
                     itemModelList.add(itemModel);
 
-
-
-
-
                 }
                 adminItemAdapter.notifyDataSetChanged();
 
             }
         });
+        findViewById(R.id.orderlist).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ordermodellist=new ArrayList<>();
+                fetchdatafromOrderList();
+                orderlist_adapter=new Orderlist_adapter(Admin_Dashboard.this,ordermodellist);
 
+                Intent intent=new Intent(Admin_Dashboard.this, Orderlist.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void fetchdatafromOrderList() {
+
+        FirebaseFirestore.getInstance().collection("OrderInfo").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+                public void onSuccess(QuerySnapshot documentSnapshot) {
+                if(ordermodellist!=null) {
+                    ordermodellist.clear();
+                }
+
+                for(DocumentSnapshot snapshot: documentSnapshot){
+                    Order ordermodel=snapshot.toObject(Order.class);
+                    ordermodellist.add(ordermodel);
+                }
+                orderlist_adapter.notifyDataSetChanged();
+
+            }
+        });
     }
 }

@@ -68,7 +68,7 @@
             app:layout_constraintWidth_percent="0.4"
             app:layout_constraintStart_toStartOf="@+id/item"
             android:clickable="true"
-            android:id="@+id/item2"
+            android:id="@+id/orderlist"
 
             >
             <TextView
