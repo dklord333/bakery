@@ -70,8 +70,7 @@ public class SignupFragment extends Fragment {
 
 
 
-                Intent intent=new Intent(getContext(), customer_dashboard.class);
-                startActivity(intent);
+
             }
         });
         binding.loginText.setOnClickListener(new View.OnClickListener() {

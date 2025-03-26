@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -35,6 +36,7 @@ import com.example.myapplication.ModelClass.Order;
 import com.example.myapplication.Support_clases.DialogC;
 import com.example.myapplication.Support_clases.Orderlist;
 import com.example.myapplication.Support_clases.Validations;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,6 +57,7 @@ public class Admin_Dashboard extends AppCompatActivity {
     List<Order>ordermodellist;
     admin_item_adapter adminItemAdapter;
     Orderlist_adapter orderlist_adapter;
+    String TAG = Admin_Dashboard.class.getName();
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         itemModelList=new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.adminItem);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 items per row
+        recyclerView.setLayoutManager(new GridLayoutManager(Admin_Dashboard.this, 2)); // 2 items per row
         adminItemAdapter = new admin_item_adapter(this,itemModelList);
         recyclerView.setAdapter(adminItemAdapter);
         FetctfromFirebase();
@@ -130,7 +133,7 @@ public class Admin_Dashboard extends AppCompatActivity {
                 Log.d("Name","name is"+itemName);
 
 
-                ItemModel itemModel=new ItemModel(itemName, itemprice, itemcategory, itemstock,itemdescription,itemimage);
+                ItemModel itemModel=new ItemModel(itemName, itemprice, itemstock, itemcategory,itemdescription,itemimage);
                 if(Validations.isItemEmpty(itemModel)){
                     Customs customs=new Customs(Admin_Dashboard.this);
                     customs.showAlert("failed","compelete the form");
@@ -200,7 +203,8 @@ long date=Customs.DateTime();
                         customs.showAlert("Success","Item Created");
                     }
                 })
-                .addOnFailureListener(e -> customs.showAlert("Failure","cannot Add Item "+e));
+                .addOnFailureListener(e -> customs.showAlert("Failure","cannot Add Item "+e),e -> Log.d("failure", "Addtofirestore: Error"+e)
+                );
 
     }
 
@@ -211,17 +215,27 @@ long date=Customs.DateTime();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);  // Encode the byte array to Base64 and return as a string
     }
     public void FetctfromFirebase(){
+        Log.d(TAG, "FetctfromFirebase: Called");
         FirebaseFirestore.getInstance().collection("ItemList").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                Log.d(TAG, "onSuccess: snapshot received");
                 itemModelList.clear();
                 for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots){
+                    Log.d(TAG, "onSuccess: Item = " + documentSnapshot.get(documentSnapshot.getId(), ItemModel.class));
+                    Log.d(TAG, "onSuccess: Object = " + documentSnapshot.toObject(ItemModel.class));
                     ItemModel itemModel=documentSnapshot.toObject(ItemModel.class);
                     itemModelList.add(itemModel);
 
                 }
                 adminItemAdapter.notifyDataSetChanged();
 
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
             }
         });
         findViewById(R.id.orderlist).setOnClickListener(new View.OnClickListener() {

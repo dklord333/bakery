@@ -14,10 +14,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.myapplication.Support_clases.Authentication;
 import com.example.myapplication.databinding.FragmentLoginBinding;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class LoginFragment extends Fragment {
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,9 +67,14 @@ public class LoginFragment extends Fragment {
 binding.login.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+        String email=binding.username.getText().toString();
+        String password=binding.password.getText().toString();
+        Authentication authentication=new Authentication(auth,getContext());
 
-        Intent intent=new Intent(getContext(),Admin_Dashboard.class);
-        startActivity(intent);
+   authentication.Signin(email,password);
+
+//        Intent intent=new Intent(getContext(),Admin_Dashboard.class);
+//        startActivity(intent);
 
     }
 
